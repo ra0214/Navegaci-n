@@ -60,6 +60,10 @@ dependencies {
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.viewmodel.compose)   //viewModel()
+    implementation(libs.com.squareup.retrofit2.retrofit)        // Retrofit
+    implementation(libs.com.squareup.retrofit2.converter.json)  // JSON
+    implementation(libs.io.coil.kt.coil.compose)
+    implementation(libs.androidx.ui)                // IO
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

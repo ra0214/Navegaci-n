@@ -1,12 +1,13 @@
-package com.alilopez.demo.counter.presentation
+package com.alilopez.demo.features.counter.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class CounterViewModel : ViewModel() {
-    private var _count = MutableStateFlow(0)
-    val count: StateFlow<Int> = _count
+    private val _count = MutableStateFlow(0)
+    val count = _count.asStateFlow()
 
     fun increment() {
         _count.value++
