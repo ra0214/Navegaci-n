@@ -29,45 +29,63 @@ import com.alilopez.demo.R
 import com.alilopez.demo.features.login.presentation.viewmodels.LoginViewModel
 
 @Composable
-fun LoginScreen(viewModel : LoginViewModel = viewModel()) {
+fun LoginScreen(
+    viewModel: LoginViewModel = viewModel(),
+    onLoginSuccess: () -> Unit = {}
+) {
     val username by viewModel.username.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
     val error by viewModel.error.collectAsStateWithLifecycle()
 
-    Column(verticalArrangement = Arrangement.Center,
+    Column(
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()) {
-        Image(modifier = Modifier.size(150.dp),
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Image(
+            modifier = Modifier.size(150.dp),
             painter = painterResource(id = R.drawable.android_logo),
-            contentDescription = "Logo empresa")
+            contentDescription = "Logo empresa"
+        )
         Spacer(modifier = Modifier.height(40.dp))
-        TextField(modifier = Modifier.fillMaxWidth()
-            .padding(horizontal = 10.dp),
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp),
             value = username,
-            onValueChange = {viewModel.onChangeUsername(it)},
-            label = {Text("Username")},
-            placeholder = {Text("Username")},
-
+            onValueChange = { viewModel.onChangeUsername(it) },
+            label = { Text("Username") },
+            placeholder = { Text("Username") },
         )
         Spacer(modifier = Modifier.height(10.dp))
-        TextField(modifier = Modifier.fillMaxWidth()
-            .padding(horizontal = 10.dp),
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp),
             value = password,
-            onValueChange = {viewModel.onChangePassword(it)},
-            placeholder = {Text("Password")}
+            onValueChange = { viewModel.onChangePassword(it) },
+            placeholder = { Text("Password") }
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             error,
-            color = Color.Red)
+            color = Color.Red
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Button(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 10.dp),
-            onClick = {viewModel.onLogin()},
+            onClick = {
+                viewModel.onLogin()
+                if (viewModel.error.value.isEmpty() && username.isNotEmpty()) {
+                    onLoginSuccess()
+                }
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Blue,
-                contentColor = Color.White),
+                contentColor = Color.White
+            ),
             shape = RoundedCornerShape(10.dp),
         ) {
             Text("Iniciar sesión")
@@ -75,7 +93,7 @@ fun LoginScreen(viewModel : LoginViewModel = viewModel()) {
     }
 }
 
-@Preview (showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
     LoginScreen()

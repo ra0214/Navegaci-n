@@ -6,7 +6,6 @@ import com.alilopez.demo.features.rickandmorty.domain.usecases.GetCharactersUseC
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import com.alilopez.demo.features.rickandmorty.domain.entities.Character
 import com.alilopez.demo.features.rickandmorty.presentation.screens.CharactersUiState
 import kotlinx.coroutines.flow.update
 
